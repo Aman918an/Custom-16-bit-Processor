@@ -155,48 +155,27 @@ The included `data.mem` program and `tb.v` testbench automatically execute and v
 =======================================================
   Custom Processor - Verification Testbench
 =======================================================
---- Register File Verification ---
-
-  [PASS] Test  1: GPR[ 0] = 0x0002  (MOV R0, #2)
-  [PASS] Test  2: GPR[ 1] = 0x0003  (MOV R1, #3)
-  [PASS] Test  3: GPR[ 2] = 0x0005  (ADD R2, R0, R1 = 2+3)
-  [PASS] Test  4: GPR[ 3] = 0x0002  (SUB R3, R2, R1 = 5-3)
-  [PASS] Test  5: GPR[ 4] = 0x0006  (MUL R4, R0, R1 = 2*3)
-  [PASS] Test  6: GPR[ 5] = 0x0003  (OR  R5, R0, R1 = 2|3)
-  [PASS] Test  7: GPR[ 6] = 0x0002  (AND R6, R0, R1 = 2&3)
-  [PASS] Test  8: GPR[ 7] = 0x0001  (XOR R7, R0, R1 = 2^3)
-  [PASS] Test  9: GPR[ 8] = 0xfffd  (NOT R8, R0 = ~2)
-  [PASS] Test 10: GPR[ 9] = 0x0005  (SENDREG R9 from data_mem[0])
-  [PASS] Test 11: GPR[10] = 0x0000  (MOV R10, #0)
-  [PASS] Test 12: GPR[11] = 0x0000  (1=0 proves JZERO skipped inst 14)
-
---- Data Memory Verification ---
-
-  [PASS] Test 13: data_mem[ 0] = 0x0005  (STOREREG dm[0] = R2 = 5)
-  [PASS] Test 14: data_mem[ 1] = 0x0006  (STOREREG dm[1] = R4 = 6)
-
---- Condition Flag Verification ---
-
-  [PASS] Test 15: zero flag (after MOV R10,#0) = 1
-  [PASS] Test 16: sign flag (after MOV R10,#0) = 0
-  [PASS] Test 17: carry flag = 0
-  [PASS] Test 18: overflow flag = 0
-
---- Control Signal Verification ---
-
-  [PASS] Test 19: stop (HALT executed) = 1
-  [PASS] Test 20: SGPR = 0x0000  (MUL upper = 0)
-
---- Reset Behavior Verification ---
-
-  [PASS] Test 21: PC = 0 after reset
-  [PASS] Test 22: stop cleared by reset
-  [PASS] Test 23: jmp_flag cleared by reset
 
   RESULTS: 23 PASSED, 0 FAILED (out of 23 tests)
   *** ALL TESTS PASSED ***
 =======================================================
 ```
+
+### Simulation Waveform
+
+*Since the full simulation is too detailed to fit cleanly in one picture, here is the waveform split into two clear sections:*
+
+<p align="center">
+  <img src="wave1.png" alt="Waveform Part 1 (0 to 500ns)">
+  <br><i>Part 1: Initial reset, MOV, ADD, SUB, and MUL instructions</i>
+</p>
+
+<p align="center">
+  <img src="wave2.png" alt="Waveform Part 2 (400ns to 1000ns)">
+  <br><i>Part 2: Logical operations, Memory Stores, and Condition Branching</i>
+</p>
+
+> **Note:** The `GPR` and `Flag` registers have been grouped to maintain a clean layout while showing exactly how the processor executes each instruction cycle-by-cycle.
 
 ## Tools Used
 
