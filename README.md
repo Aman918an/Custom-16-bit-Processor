@@ -166,13 +166,13 @@ The included `data.mem` program and `tb.v` testbench automatically execute and v
 *Since the full simulation is too detailed to fit cleanly in one picture, here is the waveform split into two clear sections:*
 
 <p align="center">
-  <img src="wave1.png" alt="Waveform Part 1 (0 to 500ns)">
-  <br><i>Part 1: Initial reset, MOV, ADD, SUB, and MUL instructions</i>
+  <img src="wave1.png" alt="Waveform Part 1 (0 to 800ns)">
+  <br><i>Part 1 (0 - 800ns): Initial reset, Arithmetic operations (MOV, ADD, SUB, MUL), and initial Logical operations</i>
 </p>
 
 <p align="center">
-  <img src="wave2.png" alt="Waveform Part 2 (400ns to 1000ns)">
-  <br><i>Part 2: Logical operations, Memory Stores, and Condition Branching</i>
+  <img src="wave2.png" alt="Waveform Part 2 (300ns to 1100ns)">
+  <br><i>Part 2 (300 - 1100ns): Logical operations, Memory Stores, Condition Branching (JZERO), and processor HALT</i>
 </p>
 
 > **Note:** The `GPR` and `Flag` registers have been grouped to maintain a clean layout while showing exactly how the processor executes each instruction cycle-by-cycle.
