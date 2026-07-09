@@ -101,11 +101,11 @@ custom_processor/
 ├── README.md
 ├── custom_processor.xpr              # Vivado project file
 └── custom_processor.srcs/
-    ├── sources_1/new/
+    ├── sources/
     │   ├── define.vh                  # ISA opcode & field macros
     │   ├── top.v                      # Processor top module
     │   └── data.mem                   # Test program (binary)
-    └── sim_1/new/
+    └── sim/
         └── tb.v                       # Self-checking testbench
 ```
 
@@ -155,6 +155,43 @@ The included `data.mem` program and `tb.v` testbench automatically execute and v
 =======================================================
   Custom Processor - Verification Testbench
 =======================================================
+--- Register File Verification ---
+
+  [PASS] Test  1: GPR[ 0] = 0x0002  (MOV R0, #2)
+  [PASS] Test  2: GPR[ 1] = 0x0003  (MOV R1, #3)
+  [PASS] Test  3: GPR[ 2] = 0x0005  (ADD R2, R0, R1 = 2+3)
+  [PASS] Test  4: GPR[ 3] = 0x0002  (SUB R3, R2, R1 = 5-3)
+  [PASS] Test  5: GPR[ 4] = 0x0006  (MUL R4, R0, R1 = 2*3)
+  [PASS] Test  6: GPR[ 5] = 0x0003  (OR  R5, R0, R1 = 2|3)
+  [PASS] Test  7: GPR[ 6] = 0x0002  (AND R6, R0, R1 = 2&3)
+  [PASS] Test  8: GPR[ 7] = 0x0001  (XOR R7, R0, R1 = 2^3)
+  [PASS] Test  9: GPR[ 8] = 0xfffd  (NOT R8, R0 = ~2)
+  [PASS] Test 10: GPR[ 9] = 0x0005  (SENDREG R9 from data_mem[0])
+  [PASS] Test 11: GPR[10] = 0x0000  (MOV R10, #0)
+  [PASS] Test 12: GPR[11] = 0x0000  (1=0 proves JZERO skipped inst 14)
+
+--- Data Memory Verification ---
+
+  [PASS] Test 13: data_mem[ 0] = 0x0005  (STOREREG dm[0] = R2 = 5)
+  [PASS] Test 14: data_mem[ 1] = 0x0006  (STOREREG dm[1] = R4 = 6)
+
+--- Condition Flag Verification ---
+
+  [PASS] Test 15: zero flag (after MOV R10,#0) = 1
+  [PASS] Test 16: sign flag (after MOV R10,#0) = 0
+  [PASS] Test 17: carry flag = 0
+  [PASS] Test 18: overflow flag = 0
+
+--- Control Signal Verification ---
+
+  [PASS] Test 19: stop (HALT executed) = 1
+  [PASS] Test 20: SGPR = 0x0000  (MUL upper = 0)
+
+--- Reset Behavior Verification ---
+
+  [PASS] Test 21: PC = 0 after reset
+  [PASS] Test 22: stop cleared by reset
+  [PASS] Test 23: jmp_flag cleared by reset
 
   RESULTS: 23 PASSED, 0 FAILED (out of 23 tests)
   *** ALL TESTS PASSED ***
