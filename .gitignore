@@ -1,32 +1,20 @@
-# Ignore simulation outputs
-*.vcd
-*.wlf
-*.log
+# Vivado generated files
 *.jou
+*.log
 *.str
-*.dmp
 *.bak
-*.rpt
-*.map
-*.ngc
-*.ncd
-*.bit
-*.bin
-*.mcs
-*.elf
-*.mem
 
-# Ignore tool-specific folders
-/work/
-/sim/
-/build/
-/temp/
-/debug/
-/cache/
-/xsim/
-/vivado/
-/modelsim/
+# Vivado project internals (regenerated on open)
+.Xil/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
 
-# Ignore OS-generated files
-.DS_Store
+# Synthesis & implementation outputs
+*.runs/
+*.gen/
+
+# OS files
 Thumbs.db
+.DS_Store
